@@ -14,3 +14,9 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+
+Route::get('/test', 'TestController@test');
+Route::get('/test/sql', 'TestController@sql');
+Route::auth();
+
+Route::get('/home', 'HomeController@index')->name('home');
