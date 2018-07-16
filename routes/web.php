@@ -17,6 +17,7 @@
 
 Route::get('/test', 'TestController@test');
 Route::get('/test/sql', 'TestController@sql');
+Route::get('/test/skill', 'TestController@skill');
 Route::auth();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
