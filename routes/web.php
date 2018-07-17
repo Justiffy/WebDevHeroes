@@ -18,6 +18,11 @@
 Route::get('/test', 'TestController@test');
 Route::get('/test/sql', 'TestController@sql');
 Route::get('/test/skill', 'TestController@skill');
+Route::get('/test/user-skill', 'TestController@userSkill');
 Route::auth();
+
+Route::resource('/skill', 'SkillController')->only([
+    'index', 'store', 'destroy'
+]);
 
 Route::get('/', 'HomeController@index')->name('home');

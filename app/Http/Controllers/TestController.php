@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
-use App\User;
+use App\Models\User;
 
 class TestController extends Controller
 {
@@ -21,5 +21,12 @@ class TestController extends Controller
     {
         $skill = Skill::findOrFail(1);
         return $skill;
+    }
+
+    public function userSkill()
+    {
+        $user = User::findOrFail(1);
+        dd($user->skills);
+        return $user->skills;
     }
 }
