@@ -16,7 +16,7 @@ class SkillController extends Controller
     {
         $skills = Skill::query()->get();
 
-        return $skills;
+        return view('skill')->with('skills', $skills);
     }
 
     /**
@@ -27,7 +27,15 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $this->validate($request, [
+            'skill' => 'required|unique:skills|max:255',
+        ]);
+
+        $skill = new Skill();
+        $skill->fill($validateData);
+        $skill->save();
+
+        return redirect('skill');
     }
 
     /**

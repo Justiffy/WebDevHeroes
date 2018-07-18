@@ -13,6 +13,8 @@ class Skill extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['skill'];
+
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'user_skill');
