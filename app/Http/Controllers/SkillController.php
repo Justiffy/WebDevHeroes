@@ -46,7 +46,9 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Skill::destroy($id);
+
+        return redirect('skill');
     }
 
     /**

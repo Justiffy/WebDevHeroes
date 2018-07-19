@@ -16,10 +16,7 @@
                     </span>
                 @endif
             </div>
-        </div>
-
-        <div class="form-group row mb-0">
-            <div class="col-md-8 offset-md-4">
+            <div class="col-md-2">
                 <button type="submit" class="btn btn-primary">
                     Add
                 </button>
@@ -29,7 +26,18 @@
 
     @foreach($skills as $skill)
         <ul class="col-sm-2 offset-sm-4 col-form-label">
-            <li>{{ $skill->skill }}</li>
+            <li class="row">
+                <div class="col-md-4">
+                    <span class="btn btn-secondary">{{ $skill->skill }}</span>
+                </div>
+                <div class="col-md-4">
+                    <form method="POST" action="{{ route('skill.destroy', ['id' => $skill->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </form>
+                </div>
+            </li>
         </ul>
     @endforeach
 @endsection
