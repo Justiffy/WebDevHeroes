@@ -26,4 +26,5 @@ Route::resource('/skill', 'SkillController')->only([
     'index', 'store', 'destroy'
 ]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'UserController@index')->name('user.home');
+Route::get('/user/skill', 'UserController@skill')->name('user.skill');
