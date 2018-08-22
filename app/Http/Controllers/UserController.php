@@ -18,14 +18,4 @@ class UserController extends Controller
 
         return view('user.home')->with('skills', $skills);
     }
-
-    //TODO move to UserSkillController as index
-    public function skill()
-    {
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        return view('user.skill');
-    }
 }

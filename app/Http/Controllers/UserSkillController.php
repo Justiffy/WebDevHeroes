@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class UserSkillController extends Controller
@@ -13,7 +14,11 @@ class UserSkillController extends Controller
      */
     public function index()
     {
-        //
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
+        return view('user.skill');
     }
 
     /**
@@ -36,5 +41,10 @@ class UserSkillController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function list($query)
+    {
+        //TODO get skill list with limit
     }
 }
