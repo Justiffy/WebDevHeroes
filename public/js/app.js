@@ -821,6 +821,7 @@ document.addEventListener("DOMContentLoaded", function () {
             key: "getList",
             value: function getList(query) {
                 //TODO get skill list from server
+
                 console.log("getList");
             }
         }, {
@@ -850,14 +851,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return SkillList;
     }(SkillObject);
 
-    var input = new SkillSearchInput('skillSearchInput');
+    var input = new SkillSearchInput('searchSkillInput');
     var list = new SkillList('skillList');
-    input.toString();
-    list.toString();
 
-    list.object.addEventListener('click', function (e) {
-        list.hide();
-        list.toString();
+    input.object.addEventListener('input', function () {
+        var value = input.value;
+        if (value === "") {
+            list.hide();
+        } else if (value.length > 0) {
+            list.refresh(value);
+            list.show();
+        }
     });
 });
 

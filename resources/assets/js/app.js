@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         getList(query) {
             //TODO get skill list from server
+
             console.log("getList");
         }
 
@@ -54,13 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    let input = new SkillSearchInput('skillSearchInput');
+    let input = new SkillSearchInput('searchSkillInput');
     let list = new SkillList('skillList');
-    input.toString();
-    list.toString();
 
-    list.object.addEventListener('click', function (e) {
-        list.hide();
-        list.toString();
-    })
+    input.object.addEventListener('input', function () {
+        let value = input.value;
+        if (value === "") {
+            list.hide();
+        } else if (value.length > 0) {
+            list.refresh(value);
+            list.show();
+        }
+    });
 });
