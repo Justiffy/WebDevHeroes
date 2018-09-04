@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
+use App\Models\User;
+use App\Models\UserSkill;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -46,5 +49,8 @@ class UserSkillController extends Controller
     public function list($query)
     {
         //TODO get skill list with limit
+        $skills = Skill::query()->where('skill', 'like', $query . '%')->get();
+
+        return $skills;
     }
 }

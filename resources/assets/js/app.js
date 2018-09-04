@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+const axios = require('axios');
+
 /** main js */
 document.addEventListener("DOMContentLoaded", function () {
     class SkillObject {
@@ -30,20 +32,22 @@ document.addEventListener("DOMContentLoaded", function () {
             this.list = [];
         }
 
-        getList(query) {
-            //TODO get skill list from server
-
-            console.log("getList");
-        }
-
         render() {
-            //TODO render list method
-            console.log("render");
+            this.list.forEach(function (item) {
+                console.log(item);
+            });
         }
 
         refresh(query) {
-            this.getList(query);
-            this.render();
+            let self = this;
+            axios.get('/user/skill/list/' + query)
+                .then(function (response) {
+                    self.list = response.data;
+                }).catch(function () {
+                    self.list = [];
+                }).then(function () {
+                    self.render();
+                });
         }
 
         hide() {
@@ -59,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let list = new SkillList('skillList');
 
     input.object.addEventListener('input', function () {
-        let value = input.value;
-        if (value === "") {
+        let value = input.object.value;
+        if (value === "" || value === undefined) {
             list.hide();
         } else if (value.length > 0) {
             list.refresh(value);

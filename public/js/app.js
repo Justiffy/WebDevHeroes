@@ -773,6 +773,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 __webpack_require__(9);
 
+var axios = __webpack_require__(10);
+
 /** main js */
 document.addEventListener("DOMContentLoaded", function () {
     var SkillObject = function () {
@@ -784,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         _createClass(SkillObject, [{
-            key: "toString",
+            key: 'toString',
             value: function toString() {
                 console.log("Hello, I am " + this.constructor.name + ", id=" + this.id);
             }
@@ -818,31 +820,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         _createClass(SkillList, [{
-            key: "getList",
-            value: function getList(query) {
-                //TODO get skill list from server
-
-                console.log("getList");
-            }
-        }, {
-            key: "render",
+            key: 'render',
             value: function render() {
-                //TODO render list method
-                console.log("render");
+                this.list.forEach(function (item) {
+                    console.log(item);
+                });
             }
         }, {
-            key: "refresh",
+            key: 'refresh',
             value: function refresh(query) {
-                this.getList(query);
-                this.render();
+                var self = this;
+                axios.get('/user/skill/list/' + query).then(function (response) {
+                    self.list = response.data;
+                }).catch(function () {
+                    self.list = [];
+                }).then(function () {
+                    self.render();
+                });
             }
         }, {
-            key: "hide",
+            key: 'hide',
             value: function hide() {
                 this.object.classList.remove('show');
             }
         }, {
-            key: "show",
+            key: 'show',
             value: function show() {
                 this.object.classList.add('show');
             }
@@ -855,8 +857,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var list = new SkillList('skillList');
 
     input.object.addEventListener('input', function () {
-        var value = input.value;
-        if (value === "") {
+        var value = input.object.value;
+        if (value === "" || value === undefined) {
             list.hide();
         } else if (value.length > 0) {
             list.refresh(value);

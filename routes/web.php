@@ -28,3 +28,4 @@ Route::resource('/skill', 'SkillController')->only([
 
 Route::get('/', 'UserController@index')->name('user.home');
 Route::get('/user/skill', 'UserSkillController@index')->name('user.skill');
+Route::get('/user/skill/list/{query}', 'UserSkillController@list');
